@@ -39,11 +39,11 @@ The primary objective is to minimize the error in forecasting next-hour demand a
 | Model | MAE | RMSE | Notes |
 | :--- | :--- | :--- | :--- |
 | **Baseline (T-7 days)** | 5.82 | 8.14 | Simple seasonal sanity check. |
-| **LightGBM (Production)** | **2.59** | **3.85** | **55% improvement** over baseline. |
+| **LightGBM (Production)** | **2.39** | **2.59** | **59% improvement** over baseline. |
 
 ### 🔍 Key Findings
-* **LightGBM outperforms the seasonal baseline by >50%**, validating that demand is driven by more than just weekly seasonality (e.g., recent trends, weather, holidays).
-* The **2.59 MAE** indicates that, on average, the model's prediction is off by only ~2.5 rides per hour for a given zone, which is highly actionable for fleet positioning.
+* **LightGBM outperforms the seasonal baseline by nearly 60%**, validating that demand is driven by more than just weekly seasonality (e.g., recent trends, weather, holidays).
+* The **2.39 MAE** indicates that, on average, the model's prediction is off by fewer than **3 rides per hour** for a given zone, which is highly actionable for fleet positioning.
 * *Technical Note:* LightGBM was selected as the production model architecture after offline experimentation demonstrated it outperformed Linear Regression and XGBoost in both training efficiency and inference latency.
   
 ## 🤖 Machine Learning Approach
