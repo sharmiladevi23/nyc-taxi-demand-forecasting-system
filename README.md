@@ -27,7 +27,7 @@ graph LR
     E -->|Load Model| F
     F -->|Write Predictions| C
     C -->|Fetch Predictions| G[Streamlit Dashboard]
-```
+```mermaid
 
 ## 🤖 Machine Learning Approach
 
