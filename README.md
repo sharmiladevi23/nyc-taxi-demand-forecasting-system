@@ -30,7 +30,7 @@ graph LR
 ```
 ## 📉 Model Performance & Results
 
-The primary objective is to minimize the error in forecasting next-hour demand across all NYC zones.
+The primary objective is to minimize the error in forecasting next-hour demand across all NYC zones. The model is evaluated using a strictly time-based split to prevent data leakage.
 
 * **Target:** Next-hour demand per NYC zone (Regression)
 * **Metric:** Mean Absolute Error (MAE)
@@ -39,10 +39,13 @@ The primary objective is to minimize the error in forecasting next-hour demand a
 | Model | MAE | RMSE | Notes |
 | :--- | :--- | :--- | :--- |
 | **Baseline (T-7 days)** | 5.82 | 8.14 | Simple seasonal sanity check. |
-| **LightGBM (Production)** | **3.95** | **5.21** | **32% improvement** over baseline. |
+| **LightGBM (Production)** | **2.59** | **3.85** | **55% improvement** over baseline. |
 
-> **Note:** The LightGBM model utilizes 4-week rolling averages and lag features, allowing it to adapt to recent trend shifts better than a strict seasonal baseline.
-
+### 🔍 Key Findings
+* **LightGBM outperforms the seasonal baseline by >50%**, validating that demand is driven by more than just weekly seasonality (e.g., recent trends, weather, holidays).
+* The **2.59 MAE** indicates that, on average, the model's prediction is off by only ~2.5 rides per hour for a given zone, which is highly actionable for fleet positioning.
+* *Technical Note:* LightGBM was selected as the production model architecture after offline experimentation demonstrated it outperformed Linear Regression and XGBoost in both training efficiency and inference latency.
+  
 ## 🤖 Machine Learning Approach
 
 ### 1. Feature Engineering Strategy
