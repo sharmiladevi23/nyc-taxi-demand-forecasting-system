@@ -91,15 +91,13 @@ The project follows a modular MLOps directory structure, separating source code 
 └── README.md
 ```
 
-🚀 Getting Started
-Prerequisites
-Python 3.9+
+##🚀 Getting Started
+**Prerequisites**
+1. Python 3.9+
+2. Hopsworks Account: A free account at hopsworks.ai to host the Feature Store.
+3. Streamlit: For the frontend dashboard.
 
-Hopsworks Account: A free account at hopsworks.ai to host the Feature Store.
-
-Streamlit: For the frontend dashboard.
-
-Installation
+**Installation**
 1. Clone the repository
 git clone [https://github.com/sharmiladevi23/nyc-taxi-demand-forecasting-system.git](https://github.com/sharmiladevi23/nyc-taxi-demand-forecasting-system.git)
 cd nyc-taxi-demand-forecasting-system
@@ -111,30 +109,29 @@ cd nyc-taxi-demand-forecasting-system
    HOPSWORKS_API_KEY="your_api_key_here"
    HOPSWORKS_PROJECT_NAME="nyc_taxi_proj"
 
-🏃‍♂️ Usage Guide
+###🏃‍♂️ Usage Guide
 This system is designed to run as three independent micro-pipelines. You can trigger them manually or schedule them via Airflow/GitHub Actions.
 
-1. Backfill the Feature Store
+**1. Backfill the Feature Store**
 Runs the feature_pipeline.py to fetch the last 28 days of raw data and populate the Feature Group.
 python feature_pipeline.py
 
-2. Train the Model
+**2. Train the Model**
 Runs model_training_pipeline.py to train a new LightGBM candidate. It will only register the model to the registry if New MAE < Current Production MAE.
 python model_training_pipeline.py
 
-3. Run Hourly Inference
+**3. Run Hourly Inference**
 Runs inference_pipeline.py to fetch the latest batch features, predict the next hour's demand, and update the dashboard view.
 python inference_pipeline.py
 
-5. Launch the Dashboard
+**5. Launch the Dashboard**
 Start the Streamlit app to visualize the real-time predictions.
 streamlit run frontend_v1.py
 
-🔮 Future Roadmap
-Containerization: Dockerize the pipeline scripts for deployment on Kubernetes (EKS).
+###🔮 Future Roadmap
+**Containerization:** Dockerize the pipeline scripts for deployment on Kubernetes (EKS).
+**CI/CD:** Implement GitHub Actions to run pytest on push and auto-deploy the Streamlit app.
+**Drift Detection:** Integrate EvidentlyAI to monitor data drift and trigger automatic retraining if the data distribution shifts.
 
-CI/CD: Implement GitHub Actions to run pytest on push and auto-deploy the Streamlit app.
-
-Drift Detection: Integrate EvidentlyAI to monitor data drift and trigger automatic retraining if the data distribution shifts.
-
-Author: Sharmila Devi
+###Author
+Sharmila Devi
