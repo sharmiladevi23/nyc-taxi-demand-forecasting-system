@@ -1,10 +1,10 @@
 # 🚖 NYC Taxi Demand Forecasting Platform (MLOps)
 
-![Python](https://img.shields.io/badge/Python-3.9%2B-blue)
-![Hopsworks](https://img.shields.io/badge/Feature_Store-Hopsworks-green)
-![LightGBM](https://img.shields.io/badge/Model-LightGBM-orange)
-![Streamlit](https://img.shields.io/badge/Frontend-Streamlit-red)
-![Status](https://img.shields.io/badge/Status-Production_Ready-success)
+[![Python](https://img.shields.io/badge/Python-3.9%2B-blue?logo=python&logoColor=white)](https://www.python.org/)
+[![Hopsworks](https://img.shields.io/badge/Feature_Store-Hopsworks-green?logo=hopsworks&logoColor=white)](https://www.hopsworks.ai/)
+[![LightGBM](https://img.shields.io/badge/Model-LightGBM-orange)](https://lightgbm.readthedocs.io/)
+[![Streamlit](https://img.shields.io/badge/Frontend-Streamlit-red?logo=streamlit&logoColor=white)](https://streamlit.io/)
+[![Status](https://img.shields.io/badge/Status-Production_Ready-success)]()
 
 ## 📋 Executive Summary
 This project implements an end-to-end **MLOps system** to forecast real-time taxi demand in New York City. Unlike static historical analysis, this platform provides **next-hour predictions** at a granular zone level, enabling fleet operators to optimize driver allocation and reduce passenger wait times.
