@@ -100,33 +100,33 @@ The project follows a modular MLOps directory structure, separating source code 
 **Installation**
 1. Clone the repository
 git clone [https://github.com/sharmiladevi23/nyc-taxi-demand-forecasting-system.git](https://github.com/sharmiladevi23/nyc-taxi-demand-forecasting-system.git)
-cd nyc-taxi-demand-forecasting-system
+`cd nyc-taxi-demand-forecasting-system`
 
 2. Install dependencies
-   pip install -r requirements.txt
+   `pip install -r requirements.txt`
    
 3. Configure Credentials Create a .env file in the root directory to store your secrets (do not commit this file):
-   HOPSWORKS_API_KEY="your_api_key_here"
-   HOPSWORKS_PROJECT_NAME="nyc_taxi_proj"
+   `HOPSWORKS_API_KEY="your_api_key_here"`
+   `HOPSWORKS_PROJECT_NAME="nyc_taxi_proj"`
 
 ### 🏃‍♂️ Usage Guide
 This system is designed to run as three independent micro-pipelines. You can trigger them manually or schedule them via Airflow/GitHub Actions.
 
 **1. Backfill the Feature Store**
 Runs the feature_pipeline.py to fetch the last 28 days of raw data and populate the Feature Group.
-python feature_pipeline.py
+    `python feature_pipeline.py`
 
 **2. Train the Model**
 Runs model_training_pipeline.py to train a new LightGBM candidate. It will only register the model to the registry if New MAE < Current Production MAE.
-python model_training_pipeline.py
+    `python model_training_pipeline.py`
 
 **3. Run Hourly Inference**
 Runs inference_pipeline.py to fetch the latest batch features, predict the next hour's demand, and update the dashboard view.
-python inference_pipeline.py
+    `python inference_pipeline.py`
 
 **5. Launch the Dashboard**
 Start the Streamlit app to visualize the real-time predictions.
-streamlit run frontend_v1.py
+    `streamlit run frontend_v1.py`
 
 ### 🔮 Future Roadmap
 **Containerization:** Dockerize the pipeline scripts for deployment on Kubernetes (EKS).
