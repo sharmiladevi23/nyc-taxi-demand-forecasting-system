@@ -91,7 +91,7 @@ The project follows a modular MLOps directory structure, separating source code 
 └── README.md
 ```
 
-##🚀 Getting Started
+### Getting Started
 **Prerequisites**
 1. Python 3.9+
 2. Hopsworks Account: A free account at hopsworks.ai to host the Feature Store.
@@ -109,7 +109,7 @@ cd nyc-taxi-demand-forecasting-system
    HOPSWORKS_API_KEY="your_api_key_here"
    HOPSWORKS_PROJECT_NAME="nyc_taxi_proj"
 
-###🏃‍♂️ Usage Guide
+### 🏃‍♂️ Usage Guide
 This system is designed to run as three independent micro-pipelines. You can trigger them manually or schedule them via Airflow/GitHub Actions.
 
 **1. Backfill the Feature Store**
@@ -128,10 +128,10 @@ python inference_pipeline.py
 Start the Streamlit app to visualize the real-time predictions.
 streamlit run frontend_v1.py
 
-###🔮 Future Roadmap
+### 🔮 Future Roadmap
 **Containerization:** Dockerize the pipeline scripts for deployment on Kubernetes (EKS).
 **CI/CD:** Implement GitHub Actions to run pytest on push and auto-deploy the Streamlit app.
 **Drift Detection:** Integrate EvidentlyAI to monitor data drift and trigger automatic retraining if the data distribution shifts.
 
-###Author
+### Author
 Sharmila Devi
