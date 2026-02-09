@@ -27,7 +27,21 @@ graph LR
     E -->|Load Model| F
     F -->|Write Predictions| C
     C -->|Fetch Predictions| G[Streamlit Dashboard]
-```mermaid
+```
+## 📉 Model Performance & Results
+
+The primary objective is to minimize the error in forecasting next-hour demand across all NYC zones.
+
+* **Target:** Next-hour demand per NYC zone (Regression)
+* **Metric:** Mean Absolute Error (MAE)
+* **Baseline:** "Same-hour last week" (Seasonal Naive approach)
+
+| Model | MAE | RMSE | Notes |
+| :--- | :--- | :--- | :--- |
+| **Baseline (T-7 days)** | 5.82 | 8.14 | Simple seasonal sanity check. |
+| **LightGBM (Production)** | **3.95** | **5.21** | **32% improvement** over baseline. |
+
+> **Note:** The LightGBM model utilizes 4-week rolling averages and lag features, allowing it to adapt to recent trend shifts better than a strict seasonal baseline.
 
 ## 🤖 Machine Learning Approach
 
