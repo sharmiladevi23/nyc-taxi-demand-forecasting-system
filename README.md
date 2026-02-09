@@ -27,4 +27,28 @@ graph LR
     E -->|Load Model| F
     F -->|Write Predictions| C
     C -->|Fetch Predictions| G[Streamlit Dashboard]
+```
 
+## 🤖 Machine Learning Approach
+
+### 1. Feature Engineering Strategy
+The model avoids reliance on complex external data (like weather) by engineering robust **Time-Series Features** that capture inherent demand cycles:
+
+* **Temporal Features:**
+    * **`hour` & `day_of_week`**: Extracted to capture daily commute patterns (e.g., AM/PM rush hours) and weekly seasonality (e.g., Friday night vs. Monday morning).
+* **Lag & Window Features:**
+    * **`average_rides_last_4_weeks`**: A powerful rolling-window feature that calculates the average demand for the **same hour** on the **same day** over the last 28 days. This allows the model to "remember" monthly trends and strict recurring patterns.
+    * *Implementation:* `src.pipeline_utils.average_rides_last_4_weeks`
+
+### 2. Model Training & Governance
+* **Algorithm:** **LightGBM Regressor**. Chosen for its high efficiency with tabular data and ability to handle large-scale time-series datasets with minimal latency.
+* **Champion/Challenger Evaluation:**
+    * The training pipeline implements an automated **Gating Mechanism**.
+    * Every new model candidate is evaluated against the current **Production Model** using Mean Absolute Error (MAE).
+    * **Promotion Logic:** `if candidate_mae < production_mae: register_model()`. This ensures zero regression in production performance.
+
+### 3. Production Inference Workflow
+To simulate real-time production constraints, the inference pipeline runs on a strictly decoupled schedule:
+1.  **Lookback Context:** Fetches the last **28 days** of batch data from the Feature Store to compute necessary lag features.
+2.  **Forward Prediction:** Generates demand forecasts for the **Next Hour** (T+1).
+3.  **Write-Back:** Predictions are materialized back into the Feature Store (`model_prediction` feature group), making them instantly available for the Streamlit dashboard via low-latency lookup.
